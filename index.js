@@ -1,14 +1,14 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.argv.length == 2 ? process.env.token : "";
-const welcomeChannelName = "안녕하세요";
-const byeChannelName = "안녕히가세요";
-const welcomeChannelComment = "어서오세요.";
-const byeChannelComment = "안녕히가세요.";
+const welcomeChannelName = "환영방";
+const byeChannelName = "이별방";
+const welcomeChannelComment = "밤골목에 어서와. 난 이 골목의 총괄자 미카엘이야. 잘부탁해.";
+const byeChannelComment = "벌써 가버리는거야? 하는수 없지. 내일밤 골목에서 다시 만나길.";
 
 client.on('ready', () => {
   console.log('켰다.');
-  client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
+  client.user.setPresence({ game: { name: '도움이 필요하다면!help. 언제나 곁에 있다고.' }, status: 'online' })
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -41,7 +41,7 @@ client.on('message', (message) => {
     let embed = new Discord.RichEmbed()
       .setTitle('타이틀')
       .setURL('http://www.naver.com')
-      .setAuthor('나긋해', img, 'http://www.naver.com')
+      .setAuthor('애취남(보스)', img, 'http://www.naver.com')
       .setThumbnail(img)
       .addBlankField()
       .addField('Inline field title', 'Some value here')
@@ -51,7 +51,7 @@ client.on('message', (message) => {
       .addField('Inline field title', 'Some value here1\nSome value here2\nSome value here3\n')
       .addBlankField()
       .setTimestamp()
-      .setFooter('나긋해가 만듬', img)
+      .setFooter('애취남(보스)가 만듦', img)
 
     message.channel.send(embed)
   } else if(message.content == '!help') {
@@ -66,9 +66,9 @@ client.on('message', (message) => {
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
-      .setAuthor('Help of 콜라곰 BOT', helpImg)
+      .setAuthor('Help of 애취남표마피아봇', helpImg)
       .setColor('#186de6')
-      .setFooter(`콜라곰 BOT ❤️`)
+      .setFooter(`애취남표마피아봇`)
       .setTimestamp()
     
     commandList.forEach(x => {
@@ -94,7 +94,7 @@ client.on('message', (message) => {
         x.user.send(`<@${message.author.id}> ${contents}`);
       });
   
-      return message.reply('공지를 전송했습니다.');
+      return message.reply('방금 막 비둘기를 날렸습니다.');
     } else {
       return message.reply('채널에서 실행해주세요.');
     }
@@ -107,7 +107,7 @@ client.on('message', (message) => {
     var isNum = !isNaN(clearLine)
 
     if(isNum && (clearLine <= 0 || 100 < clearLine)) {
-      message.channel.send("1부터 100까지의 숫자만 입력해주세요.")
+      message.channel.send("시체는 1개에서 100까지만이라고.")
       return;
     } else if(!isNum) { // c @나긋해 3
       if(message.content.split('<@').length == 2) {
@@ -131,7 +131,7 @@ client.on('message', (message) => {
     } else {
       message.channel.bulkDelete(parseInt(clearLine)+1)
         .then(() => {
-          AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "개의 메시지를 삭제했습니다. (이 메세지는 잠시 후에 사라집니다.)");
+          AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "개의 시체를 처리했다고. (이 메세지는 잠시 후에 사라집니다.)");
         })
         .catch(console.error)
     }
@@ -140,7 +140,7 @@ client.on('message', (message) => {
 
 function checkPermission(message) {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-    message.channel.send(`<@${message.author.id}> ` + "명령어를 수행할 관리자 권한을 소지하고 있지않습니다.")
+    message.channel.send(`<@${message.author.id}> ` + "시체정리? 음....... 잠시만 넌 처음보는 놈인데? 감히 날 속이려들다니.")
     return true;
   } else {
     return false;
